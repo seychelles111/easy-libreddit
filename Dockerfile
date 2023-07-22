@@ -3,13 +3,14 @@
 ####################################################################################################
 FROM rust:alpine AS builder
 
-RUN apk add --no-cache musl-dev
+RUN apk add --no-cache musl-dev github-cli
+
 
 WORKDIR /libreddit
 
 COPY . .
 
-RUN cargo build --target x86_64-unknown-linux-musl --release
+# RUN gh release download --repo libreddit/libreddit --pattern 'libreddit' --skip-existing
 
 ####################################################################################################
 ## Final image
