@@ -12,9 +12,14 @@ COPY . .
 
 
 # Make the script executable
-RUN chmod +x extract_download_url.sh
+# RUN chmod +x extract_download_url.sh
 
 
+run response=$(curl -s "https://api.github.com/repos/libreddit/libreddit/releases/latest") && \
+    download_urls=$(echo "$response" | grep -o -E "https://github.com/libreddit/libreddit/releases/download/[^/]+/libreddit") && \
+    selected_url=$(echo "$download_urls" | head -n 1) && \
+    echo "Download URL: $selected_url" && \
+    curl -LO "$selected_url"
 ##########################################
 
 # RUN gh auth login --hostname github.com
