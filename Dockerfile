@@ -5,7 +5,6 @@ FROM rust:alpine AS builder
 
 RUN apk add --no-cache musl-dev github-cli
 
-
 WORKDIR /libreddit
 
 COPY . .
