@@ -3,6 +3,8 @@
 ####################################################################################################
 FROM rust:alpine AS builder
 
+# USER root
+
 RUN apk add --no-cache musl-dev curl
 # apk add github-cli
 
@@ -19,7 +21,8 @@ run response=$(curl -s "https://api.github.com/repos/libreddit/libreddit/release
     download_urls=$(echo "$response" | grep -o -E "https://github.com/libreddit/libreddit/releases/download/[^/]+/libreddit") && \
     selected_url=$(echo "$download_urls" | head -n 1) && \
     echo "Download URL: $selected_url" && \
-    curl -LO "$selected_url"
+    curl -L "$selected_url" -o /libreddit/libreddit && \
+    chmod +x /libreddit/libreddit
 ##########################################
 
 # RUN gh auth login --hostname github.com
