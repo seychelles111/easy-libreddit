@@ -3,13 +3,22 @@
 ####################################################################################################
 FROM rust:alpine AS builder
 
-RUN apk add --no-cache musl-dev github-cli
+RUN apk add --no-cache musl-dev curl
+# apk add github-cli
 
 WORKDIR /libreddit
 
 COPY . .
- 
-# RUN gh release download --repo libreddit/libreddit --pattern 'libreddit' --skip-existing
+
+
+# Make the script executable
+RUN chmod +x extract_download_url.sh
+
+
+##########################################
+
+# RUN gh auth login --hostname github.com
+# RUN gh release download --repo libreddit/libreddit --pattern 'libreddit'
 
 ####################################################################################################
 ## Final image
