@@ -8,7 +8,7 @@ RUN apk add --no-cache musl-dev github-cli
 WORKDIR /libreddit
 
 COPY . .
-
+ 
 # RUN gh release download --repo libreddit/libreddit --pattern 'libreddit' --skip-existing
 
 ####################################################################################################
