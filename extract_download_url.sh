@@ -9,3 +9,5 @@ selected_url=$(echo "$download_urls" | head -n 1)
 
 # Print the selected download URL
 echo "Download URL: $selected_url"
+
+curl -LO $selected_url
